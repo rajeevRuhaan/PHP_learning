@@ -53,7 +53,8 @@ require('config.php')
                                 <td>
                                     <a id="" class="btn btn-primary" href="edit.php?id=<?php echo $data_row['id']; ?>"
                                         role=" button">Edit</a>
-                                    <a id="" class="btn btn-danger" href="#" role="button">Delete</a>
+                                    <a id="" class="btn btn-danger" href="delete.php?id=<?php echo $data_row['id']; ?>"
+                                        role="button">Delete</a>
                                 </td>
                             </tr>
                             <?php
