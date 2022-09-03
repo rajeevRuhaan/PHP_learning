@@ -5,7 +5,7 @@ require('config.php')
 <html lang="en">
 
 <head>
-    <title>Task Management System</title>
+    <title>Login Page</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,54 +17,33 @@ require('config.php')
 
 <body>
     <div class="card">
-        <div class="card-header">
-            <div class="container">
-                <div class="row">
-                    <a id="" class="btn btn-primary" href="create.php" role="button">Create Tasks</a>
-                </div>
-            </div>
-        </div>
+
         <div class="card-body">
             <div class="contatiner">
-                <h3> Manage Tasks </h3>
+                <h3> Login to task management system </h3>
                 <div class="row">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>S.N</th>
-                                <th>Title</th>
-                                <th>Task Description</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $select_query = "SELECT * FROM tasks";
-                            $select_result = mysqli_query($conn, $select_query);
-                            $i = 0;
-                            while($data_row = mysqli_fetch_array($select_result)) {
-                                $i++;
-                             /* Looping start and print */   
-                                ?>
-                            <tr>
-                                <td><?php echo $i ?></td>
-                                <td><?php echo $data_row['title'] ?></td>
-                                <td><?php echo $data_row['des'] ?></td>
-                                <td>
-                                    <a id="" class="btn btn-primary" href="edit.php?id=<?php echo $data_row['id']; ?>"
-                                        role=" button">Edit</a>
-                                    <a id="" class="btn btn-danger" href="delete.php?id=<?php echo $data_row['id']; ?>"
-                                        role="button">Delete</a>
-                                </td>
-                            </tr>
-                            <?php
-
-                            }
-                            ?>
+                    <div class="col-md-12">
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for=""> Email</label>
+                                <input type="email" name="title" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId">
+                            </div>
+                            <div class="form-group">
+                                <label for=""> Password</label>
+                                <input type="password" name="title" id="" class="form-control" placeholder=""
+                                    aria-describedby="helpId">
+                            </div>
 
 
-                        </tbody>
-                    </table>
+                            <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                        </form>
+                        <p class="form-text text-secondary"> If You have not register yet, <a href="register.php"
+                                target="_blank">
+                                Create your account. </a>
+                        </p>
+                    </div>
+
                 </div>
 
             </div>
