@@ -28,7 +28,7 @@ require('config.php')
             <div class="contatiner">
                 <h3> Manage Tasks </h3>
                 <div class="row">
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>S.N</th>
@@ -44,14 +44,15 @@ require('config.php')
                             $i = 0;
                             while($data_row = mysqli_fetch_array($select_result)) {
                                 $i++;
-                             /* Looping start and print the data */   
+                             /* Looping start and print */   
                                 ?>
                             <tr>
                                 <td><?php echo $i ?></td>
                                 <td><?php echo $data_row['title'] ?></td>
                                 <td><?php echo $data_row['des'] ?></td>
                                 <td>
-                                    <a id="" class="btn btn-primary" href="#" role="button">Edit</a>
+                                    <a id="" class="btn btn-primary" href="edit.php?id=<?php echo $data_row['id']; ?>"
+                                        role=" button">Edit</a>
                                     <a id="" class="btn btn-danger" href="#" role="button">Delete</a>
                                 </td>
                             </tr>
