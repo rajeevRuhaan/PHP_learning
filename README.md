@@ -1,6 +1,6 @@
 #PHP_learning
 
-## test file contains PHP scripts
+## Test file contains PHP scripts
 Learning how to write code in PHP.
 
 ## Task Management
