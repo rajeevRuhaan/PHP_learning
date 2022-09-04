@@ -29,17 +29,19 @@ require('config.php')
                         if(isset($_POST['submit'])) {
                             $name= $_POST['name'];
                             $email= $_POST['email'];
-                            $password= $_POST['password'];
-                            $confirm_password= $_POST['confirm_password'];
+                            /* md5 used to encript password */
+                            $password= md5($_POST['password']);
+                            $confirm_password= md5($_POST['confirm_password']);
                             
                             if($name != "" && $email != "" && $password != "" && $confirm_password != "" ) {
                                 if ($password === $confirm_password) {
                                     $register_query = "INSERT INTO users(name, email, password) VALUES('$name', '$email', '$password')"; 
-echo $register_query;
+
                                     $register_result = mysqli_query($conn, $register_query);
 
                                     if($register_result){
-                                        echo " You are registered successfully";
+                                        /* After successful register redirect to index page */
+                                        echo header('Location: index.php' );
                                     } else {
                                         echo " Register went wrong.";
                                     }

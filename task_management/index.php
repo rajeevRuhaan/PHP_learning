@@ -17,7 +17,24 @@ require('config.php')
 
 <body>
     <div class="card">
+        <?php
+if(isset($_POST['submit'])){
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
 
+    $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password'" ;
+    $login_result = mysqli_query($conn, $login_query);
+
+    $count = mysqli_num_rows($login_result);
+
+    if($count) {
+        echo header('Location: home.php?msg=loginsuccessfully' );
+    } else {
+        echo "Invalid user. Please check your email and password";
+    }
+    
+} 
+?>
         <div class="card-body">
             <div class="contatiner">
                 <h3> Login to task management system </h3>
@@ -26,12 +43,12 @@ require('config.php')
                         <form action="#" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for=""> Email</label>
-                                <input type="email" name="title" id="" class="form-control" placeholder=""
+                                <input type="email" name="email" id="" class="form-control" placeholder=""
                                     aria-describedby="helpId">
                             </div>
                             <div class="form-group">
                                 <label for=""> Password</label>
-                                <input type="password" name="title" id="" class="form-control" placeholder=""
+                                <input type="password" name="password" id="" class="form-control" placeholder=""
                                     aria-describedby="helpId">
                             </div>
 
