@@ -22,13 +22,25 @@ require('secureuser.php');
     <?php
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    /*  To fetch the existing data we have to use SELECT Query */
-    $select_query = "SELECT * FROM tasks WHERE id=$id";
-    $select_result = mysqli_query($conn, $select_query);
-/* making associative array when the data has fetched from database */
-    $select_row = $select_result -> fetch_assoc();
-    $select_title = $select_row['title'];
-    $select_des = $select_row['des'];
+    /* secure user can edit task */
+    $user_id = $_SESSION['id'];
+
+    $check_query = "SELECT * FROM tasks WHERE user_id=$user_id";
+    $check_result = mysqli_query($conn, $check_query);
+    $check_row = $check_result->fetch_assoc();
+    $task_user_id = $check_row['user_id'];
+  
+    if ($task_user_id == $user_id){
+        /*  To fetch the existing data we have to use SELECT Query */
+        $select_query = "SELECT * FROM tasks WHERE id=$id";
+        $select_result = mysqli_query($conn, $select_query);
+        /* making associative array when the data has fetched from database */
+        $select_row = $select_result -> fetch_assoc();
+        $select_title = $select_row['title'];
+        $select_des = $select_row['des'];
+    }else {
+echo header('Location: index.php?msg=invalid_attempt_access');
+    }
 
 }
 ?>

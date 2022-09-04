@@ -45,7 +45,8 @@ require('secureuser.php');
                         </thead>
                         <tbody>
                             <?php
-                            $select_query = "SELECT * FROM tasks";
+                            $user_id = $_SESSION['id'];
+                            $select_query = "SELECT * FROM tasks WHERE user_id=$user_id";
                             $select_result = mysqli_query($conn, $select_query);
                             $i = 0;
                             while($data_row = mysqli_fetch_array($select_result)) {

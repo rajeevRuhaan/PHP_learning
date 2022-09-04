@@ -38,7 +38,8 @@ require('secureuser.php');
                 { 
                     $title = $_POST['title'];
                     $des = $_POST['des'];
-                    $insert_query = "INSERT INTO tasks(title, des) VALUES('$title', '$des')";
+                    $user_id = $_SESSION['id'];
+                    $insert_query = "INSERT INTO tasks(title, des, user_id) VALUES('$title', '$des', '$user_id')";
                     $insert_result = mysqli_query($conn, $insert_query);
 
                     if($insert_result) {
