@@ -1,5 +1,7 @@
 <?php 
-require('config.php')
+require('config.php');
+session_start();
+require('secureuser.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,8 +28,12 @@ require('config.php')
         </div>
         <div class="card-body">
             <div class="contatiner">
-                <h3> Manage Tasks </h3>
+                <p class="form-text text-muted">
+                    You are logged as <?php echo $_SESSION['name']; ?>
+                </p>
+                <a id="" class="btn btn-secondary" href="logout.php" role="button">Logout</a>
                 <div class="row">
+                    <h3> Manage Tasks </h3>
                     <table class="table">
                         <thead>
                             <tr>

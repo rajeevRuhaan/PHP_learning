@@ -1,5 +1,7 @@
 <?php
 require('config.php');
+session_start();
+require('secureuser.php');
 
 if (isset($_GET['id'])) {
 
@@ -11,9 +13,9 @@ if (isset($_GET['id'])) {
     $delete_result = mysqli_query($conn, $delete_query);
     
     if($delete_result) {
-        echo header('Location: index.php?msg=dsuccess');
+        echo header('Location: home.php?msg=dsuccess');
     } else {
-        echo header('Location: index.php?msg=derror');
+        echo header('Location: home.php?msg=derror');
     }
 }
 ?>

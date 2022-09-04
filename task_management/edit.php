@@ -1,5 +1,7 @@
 <?php 
-require('config.php')
+require('config.php');
+session_start();
+require('secureuser.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,7 +37,7 @@ if(isset($_GET['id'])) {
         <div class="card-header">
             <div class="container">
                 <div class="row">
-                    <a id="" class="btn btn-primary" href="index.php" role="button">Manage Tasks</a>
+                    <a id="" class="btn btn-primary" href="home.php" role="button">Manage Tasks</a>
                 </div>
             </div>
         </div>

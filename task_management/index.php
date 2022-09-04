@@ -18,16 +18,22 @@ require('config.php')
 <body>
     <div class="card">
         <?php
-if(isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    if(isset($_POST['submit'])){
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
 
-    $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password'" ;
-    $login_result = mysqli_query($conn, $login_query);
+        $login_query = "SELECT * FROM users WHERE email='$email' AND password='$password'" ;
+        $login_result = mysqli_query($conn, $login_query);
 
-    $count = mysqli_num_rows($login_result);
+        $count = mysqli_num_rows($login_result);
 
-    if($count) {
+    if($count === 1) {
+        session_start();
+        $login_row = $login_result->fetch_assoc();
+        $_SESSION['id'] = $login_row['id'];
+        $_SESSION['name'] = $login_row['name'];
+        $_SESSION['email'] = $login_row['email'];
+
         echo header('Location: home.php?msg=loginsuccessfully' );
     } else {
         echo "Invalid user. Please check your email and password";
