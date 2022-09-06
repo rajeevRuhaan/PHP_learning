@@ -1,3 +1,6 @@
+<?php 
+require('../config.php')
+?>
 <!doctype html>
 <html lang="en">
 
@@ -36,15 +39,30 @@
                         </thead>
 
                         <tbody>
+                            <?php
+                            $select_query = "SELECT *FROM filemanager";
+                            $select_result = mysqli_query($conn, $select_query);
+                            $count = 0;
+                            while ($data_row = mysqli_fetch_array($select_result)) {
+                                $count ++;
+                                ?>
                             <tr>
-                                <td scope="row">1</td>
-                                <td>asdf</td>
-                                <td>asdf</td>
+                                <td scope="row"><?php echo $count ?></td>
+                                <td><?php echo $data_row['title'] ?></td>
+                                <td><img src="../uploads/<?php echo $data_row['filelink'] ?>"
+                                        alt="<?php echo $data_row['title'] ?>" height="90px" width="90px"></img> </td>
                                 <td>
-                                    <a name="" id="" class="btn btn-primary" href="#" role="button">Edit</a>
-                                    <a name="" id="" class="btn btn-danger" href="#" role="button">Delete</a>
+                                    <a class="btn btn-primary" href="edit.php?id=<?php echo $data_row['id'] ?>"
+                                        role="button">Edit</a>
+                                    <a class="btn btn-danger" href="delete.php?id=<?php echo $data_row['id'] ?>"
+                                        role="button">Delete</a>
                                 </td>
                             </tr>
+                            <?php
+
+                            }
+
+                            ?>
                         </tbody>
                     </table>
                 </div>

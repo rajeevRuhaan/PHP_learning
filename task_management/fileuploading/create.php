@@ -38,10 +38,30 @@ require('../config.php')
                         $explode_values = explode('.', $filename);
                         $filename = str_replace(' ', '', strtolower($explode_values[0]));
                         $ext = strtolower($explode_values[1]);
+                        /* concat id done by dot(.) operator */
+                        $finalfilename = $filename.time().'.'.$ext;
                         
-                        $finalname = $filename.'.'.$ext;
-                        
-                        
+                        if ($filesize <= 200000) {
+                            if($ext == 'jpg' || $ext == "png" || $ext == "jpge") {
+
+                                if (move_uploaded_file($_FILES['dataFile']['tmp_name'], '../uploads/'.$finalfilename)) {
+                                   $insert_query = "INSERT INTO filemanager (title, filelink, ext) VALUES('$title', '$finalfilename', '$ext')" ;
+                                   $result_query = mysqli_query($conn, $insert_query);
+                                   if($result_query) {
+                                    echo "File is uploaded successfully.";
+                                   } else {
+                                    echo "File uploaded Failed.";
+                                   }
+                                } else {
+                                    echo "hello";
+                                }
+                            } else {
+                                echo "File extenson is not supported. Only png, jpg and jpge is supported.";
+                            }
+                            echo "You have uploaded right file";
+                        } else {
+                            echo "File size is exceded. Supported up to 2 MB.";
+                        }
                     }
                     ?>
                     <div class="col-md-12">
