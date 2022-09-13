@@ -1,3 +1,4 @@
+<?php  require('../connection/config.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,16 +21,41 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Dev Blog</b></a>
+            <a href="../../index2.html"><b>Developer Blog</b></a>
         </div>
+        <?php
+        if(isset($_POST['submit'])){
+            $email = $_POST['email'];
+            $password = md5($_POST['password']);
+
+            $login_query = "SELECT * FROM users where email='$email' AND password='$password'";
+            $login_result = mysqli_query($conn, $login_query);
+            $count = mysqli_num_rows($login_result);
+            
+            if($count === 1) {
+                session_start();
+                $login_row = $login_result->fetch_assoc();
+                $_SESSION['id'] = $login_row['id'];
+                $_SESSION['name'] = $login_row['name'];
+                $_SESSION['email'] = $login_row['email'];
+        
+                header('Location: dashboard.php?msg=loginsuccessfully' );
+            } else {
+                echo "Invalid user. Please check your email and password";
+            }
+            
+
+
+        }
+        ?>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="../../index3.html" method="post">
+                <form action="#" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -37,7 +63,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -55,7 +81,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>
